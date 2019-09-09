@@ -27,11 +27,26 @@ helm install \
 >
 > Find the Formula `kubernetes-helm.rb` raw file
 >
-> `$ brew unlink kubernetes-helm`
+> `brew unlink kubernetes-helm`
 >
-> `$ brew install <RAW_FILE_URL>`
+> `brew install <RAW_FILE_URL>`
 >
-> `$ brew switch kubernetes-helm x.y.z`
+> `brew switch kubernetes-helm x.y.z`
 >
+
+## Install Ingress controller
+
+Find a detailed step-by-step guide in [OKE documentation](https://docs.cloud.oracle.com/iaas/Content/ContEng/Tasks/contengsettingupingresscontroller.htm)
+Create the access rule for the ingress controller
+`kubectl create clusterrolebinding <my-cluster-admin-binding> --clusterrole=cluster-admin --user=<user_OCID>`
+
+Create the ingress controller deployment
+`kubectl apply -f mandatory.yaml`
+
+Create the ingress service
+`kubectl apply -f cloud-generic.yaml`
+
+Check that the ingress is running as a load balancer
+`kubectl get svc -n ingress-nginx --watch`
 
 
